@@ -1,0 +1,46 @@
+const { CityRepository } = require('../repository/index.js');
+
+class CityService {
+    constructor() {
+        this.cityRepository = new CityRepository();
+    }
+
+    async createCity(data) {
+        try {
+            const city = await this.cityRepository.createCity(data);
+            return city;
+        } catch (error) {
+            console.log("Error in createCity in service layer");
+            throw {error};
+        }
+    }
+
+    async deleteCity(cityId) {
+        try {
+            const response = await this.cityRepository.deleteCity(cityId);
+        } catch (error) {
+            console.log("Error in createCity in service layer");
+            throw {error};
+        }
+    }
+
+    async updateCity(cityId, data) {
+        try {
+            const city = await this.cityRepository.updateCity(cityId, data);
+            return city;
+        } catch (error) {
+            console.log("Error in createCity in service layer");
+            throw {error};
+        }
+    }
+
+    async getCity(cityId) {
+        try {
+            const city = await this.cityRepository.getCity(cityId);
+            return city;
+        } catch (error) {
+            console.log("Error in createCity in service layer");
+            throw {error};
+        }
+    }
+}
