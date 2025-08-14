@@ -10,7 +10,7 @@ class CityService {
       const city = await this.cityRepository.createCity(data);
       return city;
     } catch (error) {
-      console.log("Error in createCity in service layer");
+      console.log("Error in createCity in city service");
       throw { error };
     }
   }
@@ -20,7 +20,7 @@ class CityService {
       const response = await this.cityRepository.deleteCity(cityId);
       return response;
     } catch (error) {
-      console.log("Error in deleteCity in service layer");
+      console.log("Error in deleteCity in city service");
       throw { error };
     }
   }
@@ -30,7 +30,7 @@ class CityService {
       const city = await this.cityRepository.updateCity(cityId, data);
       return city;
     } catch (error) {
-      console.log("Error in updateCity in service layer");
+      console.log("Error in updateCity in city service");
       throw { error };
     }
   }
@@ -40,17 +40,17 @@ class CityService {
       const city = await this.cityRepository.getCity(cityId);
       return city;
     } catch (error) {
-      console.log("Error in getCity in service layer");
+      console.log("Error in getCity in city service");
       throw { error };
     }
   }
 
-  async getAllCities() {
+  async getAllCities(filter) {
     try {
-      const cities = await this.cityRepository.getAllCities();
+      const cities = await this.cityRepository.getAllCities({name: filter.name});
       return cities;
     } catch (error) {
-      console.log("Error in getAllCities in service layer");
+      console.log("Error in getAllCities in city service");
       throw { error };
     }
   }

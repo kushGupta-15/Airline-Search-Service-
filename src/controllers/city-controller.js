@@ -12,7 +12,7 @@ const create = async (req, res) => {
       err: {},
     });
   } catch (error) {
-    console.log("Error in create in city-controller");
+    console.log("Error in create in city controller");
     res.status(500).json({
       data: {},
       success: false,
@@ -32,7 +32,7 @@ const destroy = async (req, res) => {
       err: {},
     });
   } catch (error) {
-    console.log("Error in destroy in city-controller");
+    console.log("Error in destroy in city controller");
     return res.status(500).json({
       data: {},
       success: false,
@@ -52,7 +52,7 @@ const update = async (req, res) => {
       err: {},
     });
   } catch (error) {
-    console.log("Error in update in city-controller");
+    console.log("Error in update in city controller");
     res.status(500).json({
       data: {},
       success: false,
@@ -72,7 +72,7 @@ const get = async (req, res) => {
       err: {},
     });
   } catch (error) {
-    console.log("Error in get in city-controller");
+    console.log("Error in get in city controller");
     res.status(500).json({
       data: {},
       success: false,
@@ -84,7 +84,9 @@ const get = async (req, res) => {
 
 const getAll = async (req, res) => {
   try {
-    const cities = await cityService.getAllCities();
+    console.log(req.params);
+    
+    const cities = await cityService.getAllCities(req.query);
     return res.status(200).json({
       data: cities,
       success: true,
@@ -92,7 +94,7 @@ const getAll = async (req, res) => {
       err: {},
     });
   } catch (error) {
-    console.log("Error in getAll in city-controller");
+    console.log("Error in getAll in city controller");
     res.status(500).json({
       data: {},
       success: false,
