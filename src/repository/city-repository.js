@@ -30,7 +30,7 @@ class CityRepository {
       //   where: {
       //     id: cityId,
       //   },
-        
+
       // });
       const city = await City.findByPk(cityId);
       city.name = data.name;
@@ -48,6 +48,16 @@ class CityRepository {
       return city;
     } catch (error) {
       console.log("Error in getCity method in city-repository.js");
+      throw { error };
+    }
+  }
+
+  async getAllCities() {
+    try {
+      const cities = await City.findAll();
+      return cities;
+    } catch (error) {
+      console.log("Error in getAllCities method in city-repository.js");
       throw { error };
     }
   }
