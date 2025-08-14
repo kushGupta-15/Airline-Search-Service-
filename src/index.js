@@ -3,6 +3,8 @@ const { PORT } = require("./config/serverConfig.js");
 // const { CityRepository } = rfequire("./repository/index.js");
 // const { City } = require("./models/index.js")
 const ApiRoutes = require('./routes/index.js');
+const db = require("./models/index.js");
+const sequelize = require("sequelize");
 
 const setupAndStartServer = async () => {
   const app = express();
@@ -19,7 +21,10 @@ const setupAndStartServer = async () => {
     // })
 
     // const repo = new CityRepository();
-    // repo.deleteCity(1);
+    // repo.deleteCity(1); 
+    if(process.env.SYNC_DB) {
+      db.sequelize.sync({alter: true});
+    }
     
   });
 };
