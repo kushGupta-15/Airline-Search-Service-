@@ -22,9 +22,10 @@ const setupAndStartServer = async () => {
 
     // const repo = new CityRepository();
     // repo.deleteCity(1); 
-    if(process.env.SYNC_DB) {
-      db.sequelize.sync({alter: true});
-    }
+    
+    // if(process.env.SYNC_DB) {
+    //   db.sequelize.sync({alter: true});
+    // }
   });
 };
 
