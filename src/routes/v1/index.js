@@ -18,5 +18,7 @@ router.get('/flights/:id', FlightController.get);
 router.patch('/flights/:id', InternalAuthMiddleware.verifyServiceToken, FlightController.update);
 
 router.post('/airports', AirportController.create);
+router.get('/airports', AirportController.getAll);
+router.get('/airports/:id', AirportController.get);
 
 module.exports = router;

@@ -10,11 +10,24 @@ class FlightRepository {
         if(data.departureAirportId) {
             filter.departureAirportId = data.departureAirportId;
         }
-        if(data.minPrice) {
-            Object.assign(filter, {price :{[Op.gte]: data.minPrice}})
+        if(data.minPrice && data.maxPrice) {
+            Object.assign(filter, {price: {[Op.between]: [data.minPrice, data.maxPrice]}});
+        } else if(data.minPrice) {
+            Object.assign(filter, {price :{[Op.gte]: data.minPrice}});
+        } else if(data.maxPrice) {
+            Object.assign(filter, {price :{[Op.lte]: data.maxPrice}});
         }
-        if(data.maxPrice) {
-            Object.assign(filter, {price :{[Op.lte]: data.maxPrice}})
+        if(data.date) {
+            const startDate = new Date(data.date);
+            if (!isNaN(startDate.getTime())) {
+                const endDate = new Date(data.date);
+                startDate.setUTCHours(0, 0, 0, 0);
+                endDate.setUTCHours(23, 59, 59, 999);
+                filter.departureTime = { [Op.between]: [startDate, endDate] };
+            }
+        }
+        if(data.minSeats) {
+            filter.totalSeats = { [Op.gte]: Number(data.minSeats) };
         }
         return filter;
     }
