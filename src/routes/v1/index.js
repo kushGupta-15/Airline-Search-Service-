@@ -4,7 +4,7 @@ const CityController = require('../../controllers/city-controller.js');
 const FlightController = require("../../controllers/flight-controller.js");
 const AirportController = require("../../controllers/airport-controller.js")
 
-const {FlightMiddlewares} = require('../../middlewares/index.js');
+const { FlightMiddlewares, InternalAuthMiddleware } = require('../../middlewares/index.js');
 
 router.post("/city", CityController.create);
 router.get("/city/:id", CityController.get);
@@ -12,10 +12,10 @@ router.get("/city", CityController.getAll);
 router.delete('/city/:id', CityController.destroy);
 router.patch('/city/:id', CityController.update);
 
-router.post('/flights', FlightMiddlewares.validateCreateFlight,FlightController.create);
+router.post('/flights', FlightMiddlewares.validateCreateFlight, FlightController.create);
 router.get('/flights', FlightController.getAll);
 router.get('/flights/:id', FlightController.get);
-router.patch('/flights/:id', FlightController.update);
+router.patch('/flights/:id', InternalAuthMiddleware.verifyServiceToken, FlightController.update);
 
 router.post('/airports', AirportController.create);
 

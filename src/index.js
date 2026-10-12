@@ -1,4 +1,6 @@
 const express = require("express");
+const helmet = require("helmet");
+const cors = require("cors");
 const { PORT } = require("./config/serverConfig.js");
 // const { CityRepository } = rfequire("./repository/index.js");
 // const { City } = require("./models/index.js")
@@ -9,6 +11,8 @@ const db = require("./models/index.js");
 const setupAndStartServer = async () => {
   const app = express();
 
+  app.use(helmet());
+  app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({extended: true}));
 
