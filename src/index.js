@@ -14,6 +14,25 @@ const setupAndStartServer = async () => {
 
   app.use('/api', ApiRoutes);
 
+  app.get('/health', async (req, res) => {
+    try {
+      await db.sequelize.authenticate();
+      return res.status(200).json({
+        service: 'Airline-Search-Service-',
+        status: 'UP',
+        database: 'CONNECTED',
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      return res.status(503).json({
+        service: 'Airline-Search-Service-',
+        status: 'DEGRADED',
+        database: 'DISCONNECTED',
+        error: error.message
+      });
+    }
+  });
+
   app.listen(PORT, async () => {
     console.log(`Server is running at port ${PORT}`);
     // await City.create({
