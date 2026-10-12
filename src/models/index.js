@@ -20,10 +20,16 @@ const db = {};
 
 let sequelize;
 if (process.env.DATABASE_URL) {
+  const isPostgres = process.env.DATABASE_URL.startsWith('postgres');
+  const isExternalRender = process.env.DATABASE_URL.includes('oregon-postgres.render.com') || process.env.DATABASE_URL.includes('sslmode=require');
+  const requireSSL = process.env.DB_SSL === 'true' || isExternalRender;
+  const dialectOptions = requireSSL
+    ? { ssl: { require: true, rejectUnauthorized: false } }
+    : {};
   sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect: 'mysql',
+    dialect: isPostgres ? 'postgres' : 'mysql',
     logging: false,
-    dialectOptions: process.env.DB_SSL === 'true' ? { ssl: { require: true, rejectUnauthorized: false } } : {}
+    dialectOptions: dialectOptions
   });
 } else if (config.use_env_variable && process.env[config.use_env_variable]) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);

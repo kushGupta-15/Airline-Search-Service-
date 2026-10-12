@@ -77,16 +77,14 @@ const setupAndStartServer = async () => {
 
   app.listen(PORT, async () => {
     console.log(`Server is running at port ${PORT}`);
-    // await City.create({
-    //   name: "New Delhi"
-    // })
-
-    // const repo = new CityRepository();
-    // repo.deleteCity(1); 
-    
-    // if(process.env.SYNC_DB) {
-    //   db.sequelize.sync({alter: true});
-    // }
+    if (process.env.DB_SYNC === 'true') {
+      try {
+        await db.sequelize.sync({ alter: true });
+        console.log('[DB_SYNC] Search service schema synced successfully.');
+      } catch (err) {
+        console.error('[DB_SYNC ERROR]', err.message);
+      }
+    }
   });
 };
 
