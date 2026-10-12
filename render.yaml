@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: skyflow-search-service
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        sync: false
