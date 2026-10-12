@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "your_mysql_password",
+    "database": "Flights_Search_DEV",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "your_mysql_password",
+    "database": "Flights_Search_TEST",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "your_mysql_password",
+    "database": "Flights_Search_PROD",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
