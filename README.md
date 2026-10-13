@@ -60,10 +60,10 @@ flowchart TD
         FlightsTable[("Flights Table")]
     end
 
-    GW -->|GET /flights, /city, /airports (Public Search)| Routes
-    GW -->|POST /flights (Admin Schedule Dispatch)| Routes
-    BookingSvc -->|GET /flights/:id (Price & Seat Verification)| Routes
-    BookingSvc -->|PATCH /flights/:id with x-service-token (Seat Saga Deduct/Restock)| Routes
+    GW -->|"GET /flights, /city, /airports (Public Search)"| Routes
+    GW -->|"POST /flights (Admin Schedule Dispatch)"| Routes
+    BookingSvc -->|"GET /flights/:id (Price & Seat Verification)"| Routes
+    BookingSvc -->|"PATCH /flights/:id with x-service-token (Seat Saga Deduct/Restock)"| Routes
 
     Routes --> Interceptors
     Interceptors --> ControllersLayer
